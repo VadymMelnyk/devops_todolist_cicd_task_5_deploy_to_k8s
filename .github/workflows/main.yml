@@ -159,6 +159,10 @@ jobs:
         with:
           config: cluster.yml
 
+      - name: Load image into KinD
+        run: |
+          kind load docker-image ${{ secrets.DOCKERHUB_USERNAME }}/<назва-репозиторію>:${{ github.sha }}
+
       - name: Test by dry-run
         run: |
           helm upgrade --install --dry-run todoapp ./todoapp-*.tgz \
@@ -175,7 +179,7 @@ jobs:
 
       - name: Deploy Helm to Development
         run: |
-          helm upgrade --install --atomic --wait --timeout 10m --debug todoapp ./todoapp-*.tgz \
+          helm upgrade --install --atomic --wait --timeout 5m --debug todoapp ./todoapp-*.tgz \
             -f ./todoapp/values.yaml \
             --set mysql.secrets.MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}" \
             --set mysql.secrets.MYSQL_USER="${{ secrets.MYSQL_USER }}" \
@@ -186,3 +190,10 @@ jobs:
             --set kube2py.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
             --set kube2py.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
             --set kube2py.image.tag="${{ github.sha }}"
+
+      - name: Debug Kubernetes resources on failure
+        if: failure()
+        run: |
+          kubectl get pods -A
+          kubectl describe pod -l app.kubernetes.io/name=todoapp
+          kubectl logs -l app.kubernetes.io/name=todoapp --all-containers --tail=100
