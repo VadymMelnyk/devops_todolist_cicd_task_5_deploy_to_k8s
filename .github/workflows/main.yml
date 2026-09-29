@@ -161,7 +161,7 @@ jobs:
 
       - name: Load image into KinD
         run: |
-          kind load docker-image ${{ secrets.DOCKERHUB_USERNAME }}/<назва-репозиторію>:${{ github.sha }}
+          kind load docker-image ${{ secrets.DOCKERHUB_USERNAME }}/todoapp:${{ github.sha }}
 
       - name: Test by dry-run
         run: |
