@@ -168,12 +168,12 @@ jobs:
             --set mysql.secrets.MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}" \
             --set mysql.secrets.MYSQL_USER="${{ secrets.MYSQL_USER }}" \
             --set mysql.secrets.MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}" \
-            --set kube2py.secrets.SECRET_KEY="${{ secrets.SECRET_KEY }}" \
-            --set kube2py.secrets.DB_NAME="${{ secrets.DB_NAME }}" \
-            --set kube2py.secrets.DB_USER="${{ secrets.DB_USER }}" \
-            --set kube2py.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            --set kube2py.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
-            --set kube2py.image.tag="${{ github.sha }}"
+            --set todoapp.secrets.SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+            --set todoapp.secrets.DB_NAME="${{ secrets.DB_NAME }}" \
+            --set todoapp.secrets.DB_USER="${{ secrets.DB_USER }}" \
+            --set todoapp.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            --set todoapp.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
+            --set todoapp.image.tag="${{ github.sha }}"
 
       - name: Deploy Helm to Development
         run: |
@@ -182,12 +182,12 @@ jobs:
             --set mysql.secrets.MYSQL_ROOT_PASSWORD="${{ secrets.MYSQL_ROOT_PASSWORD }}" \
             --set mysql.secrets.MYSQL_USER="${{ secrets.MYSQL_USER }}" \
             --set mysql.secrets.MYSQL_PASSWORD="${{ secrets.MYSQL_PASSWORD }}" \
-            --set kube2py.secrets.SECRET_KEY="${{ secrets.SECRET_KEY }}" \
-            --set kube2py.secrets.DB_NAME="${{ secrets.DB_NAME }}" \
-            --set kube2py.secrets.DB_USER="${{ secrets.DB_USER }}" \
-            --set kube2py.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
-            --set kube2py.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
-            --set kube2py.image.tag="${{ github.sha }}"
+            --set todoapp.secrets.SECRET_KEY="${{ secrets.SECRET_KEY }}" \
+            --set todoapp.secrets.DB_NAME="${{ secrets.DB_NAME }}" \
+            --set todoapp.secrets.DB_USER="${{ secrets.DB_USER }}" \
+            --set todoapp.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
+            --set todoapp.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
+            --set todoapp.image.tag="${{ github.sha }}"
 
       - name: Debug Kubernetes resources on failure
         if: failure()
