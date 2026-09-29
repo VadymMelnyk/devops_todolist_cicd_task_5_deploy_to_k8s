@@ -186,6 +186,3 @@ jobs:
             --set kube2py.secrets.DB_PASSWORD="${{ secrets.DB_PASSWORD }}" \
             --set kube2py.secrets.DB_HOST="${{ secrets.DB_HOST }}" \
             --set kube2py.image.tag="${{ github.sha }}"
-
-
-
